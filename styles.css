@@ -160,18 +160,23 @@ label {
 }
 
 dialog {
-  margin: 1rem;
   text-align: left;
   background-color: var(--bg-color);
   color: var(--text-color);
   max-height: 90%;
   overflow-y: auto;
+  border-radius: 0.8rem;
+  border: 0.1px solid;
 }
 
 dialog p,
 dialog h2 {
   text-align: center;
   text-wrap: pretty;
+}
+
+#historyModal {
+  text-align: center;
 }
 
 dialog button {

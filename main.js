@@ -13,8 +13,12 @@ const elements = {
   resultDiv: getElement("resultDiv"),
   swapBtn: getElement("swapBtn"),
   resetBtn: getElement("resetBtn"),
-  modalCloseBtn: getElement("modalCloseBtn"),
-  dialog: getElement("instructions"),
+  helpCloseBtn: getElement("helpCloseBtn"),
+  helpBtn: getElement("helpBtn"),
+  helpModal: getElement("instructions"),
+  historyBtn: getElement("historyBtn"),
+  historyCloseBtn: getElement("helpCloseBtn"),
+  historyModal: getElement("historyModal"),
 };
 
 const currencies = [
@@ -123,15 +127,19 @@ const convertCurrency = () => {
     .then(data => {
       const convertedAmount = data.converted_amount.toFixed(2);
       const exchangeRate = data.exchange_rate.toFixed(4);
+      const resultText = `${amount} ${baseCurrency.code} = ${convertedAmount} ${targetCurrency.code}`;
 
       elements.resultDiv.innerHTML =
         `<p>Exchange rate:</p>
         <p>1 ${baseCurrency.code} = ${exchangeRate} ${targetCurrency.code}</p>
         <hr>
          <p><strong>Result:</strong></p>
-         <h2>${amount} ${baseCurrency.code} = ${convertedAmount} ${targetCurrency.code}</h2>`;
+         <h2>${resultText}</h2>`;
 
       elements.resultDiv.style.cssText = "display: block; color: inherit;";
+
+      savedResults.unshift(resultText);
+      localStorage.setItem("savedResults", JSON.stringify(savedResults));
     })
     .catch(error => {
       elements.resultDiv.innerHTML = "<p>Error fetching conversion rate. Please try again later.</p>";
@@ -161,6 +169,23 @@ elements.resetBtn.addEventListener("click", () => {
   elements.resultDiv.style.display = "none";
 });
 
+elements.historyBtn.addEventListener("click", () => {
+  if (!savedResults.length) {
+    elements.historyModal.innerHTML = "<p>No previous results are available.</p>";
+  } else {
+    const resultsList = savedResults.map((result, index) => `<li key="${index}">${result}</li>`).join("");
+    elements.historyModal.innerHTML = `<ul>${resultsList}</ul>`;
+  }
+
+  elements.historyModal.innerHTML += ` <p>Click the "close" button to close this dialog.</p>`;
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "Close";
+  closeBtn.addEventListener("click", () => elements.historyModal.close());
+  elements.historyModal.appendChild(closeBtn);
+
+  elements.historyModal.showModal();
+});
+
 const inputElements = [elements.baseCurrencyInput, elements.targetCurrencyInput];
 
 inputElements.forEach(inputEl => {
@@ -174,6 +199,9 @@ document.addEventListener("click", (event) => {
 
 elements.convertBtn.addEventListener("click", convertCurrency);
 elements.swapBtn.addEventListener("click", swapCurrencies);
-elements.modalCloseBtn.addEventListener("click", () => {
-  elements.dialog.close();
+elements.helpBtn.addEventListener("click", () => {
+  elements.helpModal.showModal();
+});
+elements.helpCloseBtn.addEventListener("click", () => {
+  elements.helpModal.close();
 });
