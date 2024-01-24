@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currencify - Convert Currency</title>
+  <meta name="description" content="Convert currencies easily with Currencify. Simple and efficient currency converter.">
+  <meta name="author" content="Lakhindar Pal">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://currencify.glitch.me">
+  <meta name="twitter:title" content="Currencify">
+  <meta name="twitter:description" content="Convert currencies easily with Currencify. Simple and efficient currency converter.">
+  <meta name="twitter:image" content="icons/wide-image-1200x630.webp">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://currencify.glitch.me">
+  <meta property="og:title" content="Currencify">
+  <meta property="og:description" content="Convert currencies easily with Currencify. Simple and efficient currency converter.">
+  <meta property="og:image" content="icons/wide-image-1200x630.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" sizes="512x512" href="icons/android-chrome-icon-512x512.png">
+  <link rel="icon" sizes="192x192" href="icons/android-chrome-icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+
+  <!-- Theme Color and PWA -->
+  <meta name="theme-color" content="#007bff">
+  <link rel="manifest" href="pwa/manifest.json">
+
+  <!-- Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("pwa/sw.js")
+        .then(reg => console.log("Service Worker registered", reg))
+        .catch(err => console.error("Service Worker not registered", err));
+    } else {
+      console.warn("Service Worker not supported in this browser");
+    }
+  </script>
+
+  <!-- Styles and Scripts -->
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+  <header>
+    <img src="icons/site-logo-36x36.png" alt="Site Logo">
+    <h1>Currencify - Convert Currency</h1>
+  </header>
+
+  <section>
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" id="amountInput" placeholder="Enter Amount">
+  </section>
+
+  <section class="currency-select">
+    <label for="base">From:</label>
+    <input type="text" name="base" id="baseCurrencyInput" placeholder="Search base currency...">
+    <ul id="baseCurrencyOptions" class="options-list"></ul>
+  </section>
+
+  <button id="swapBtn">⥮</button>
+
+  <section class="currency-select">
+    <label for="target">To:</label>
+    <input type="text" name="target" id="targetCurrencyInput" placeholder="Search target currency...">
+    <ul id="targetCurrencyOptions" class="options-list"></ul>
+  </section>
+
+  <section id="controlButtons">
+    <button type="submit" id="convertBtn">Convert</button>
+    <button type="reset" id="resetBtn">Reset</button>
+  </section>
+
+  <section id="resultDiv"></section>
+
+  <dialog id="instructions" open>
+    <h2>How to use</h2>
+    <ol>
+      <li><strong>Input Amount:</strong> Enter the amount you want to convert in the "Amount" input field.
+      </li>
+      <li><strong>Select Base Currency:</strong> Start typing or click on the "From" input field to choose the base currency. You can search for the currency by name or code.
+      </li>
+      <li><strong>Select Target Currency:</strong> Similarly, choose the target currency in the "To" input field.
+      </li>
+      <li><strong>Conversion:</strong> Click on the "Convert" button. The converted amount and exchange rate will be displayed.
+      </li>
+      <li><strong>Swap Currencies (Optional):</strong> If needed, you can click on the "Swap" button to switch the base and target currencies.
+      </li>
+      <li><strong>Reset (Optional):</strong> To reset the inputs and results, you can click on the "Reset" button.
+      </li>
+      <p>Click the "OK" button to close this dialog.</p>
+    </ol>
+    <button id="modalCloseBtn">OK</button>
+  </dialog>
+
+  <footer>
+    <p>
+      <span>&copy; 2024 </span>
+      <a href="https://github.com/LakhindarPal" target="_blank" rel="noopener noreferrer">@Lakhindar</a>.
+    </p>
+    <p>All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

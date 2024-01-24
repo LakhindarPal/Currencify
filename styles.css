@@ -1,0 +1,170 @@
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #000;
+  --primary-color: #007bff;
+  --secondary-color: #dddeee;
+  --mode-color: #fff;
+  --border-color: #546e7a;
+  --hover-color: #0056b3;
+  --label-color: #455a64;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --text-color: #fff;
+    --primary-color: #007bff;
+    --secondary-color: #263238;
+    --mode-color: #000;
+    --border-color: #546e7a;
+    --hover-color: #0056b3;
+    --label-color: #cfd8dc;
+  }
+}
+
+* {
+  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1,
+h2 {
+  color: var(--primary-color);
+}
+
+section {
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: var(--secondary-color);
+  width: 100%;
+}
+
+.currency-select {
+  position: relative;
+}
+
+.options-list {
+  display: none;
+  max-height: 10rem;
+  overflow-y: auto;
+  width: calc(100% - 1rem);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  border-radius: 0 0 0.8rem 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0.2rem;
+  margin-top: 0;
+}
+
+.option {
+  border: 0.5px solid var(--border-color);
+  padding: 0.8rem;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.option:hover {
+  background-color: var(--bg-color);
+  border-color: var(--mode-color);
+}
+
+input {
+  width: calc(100% - 1rem);
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  padding: 0.6rem;
+  margin: 0.2rem;
+}
+
+#baseCurrencyInput,
+#targetCurrencyInput {
+  margin-bottom: 0;
+}
+
+#baseCurrencyInput:focus,
+#targetCurrencyInput:focus {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+button {
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"] {
+  background-color: royalblue;
+}
+
+button[type="submit"]:hover {
+  background-color: darkblue;
+}
+
+button[type="reset"] {
+  background-color: red;
+}
+
+button[type="reset"]:hover {
+  background-color: darkred;
+}
+
+#swapBtn {
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+footer,
+#controlButtons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+  color: var(--label-color);
+}
+
+dialog {
+  margin: 1rem;
+  text-align: left;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+dialog p dialog h2 {
+  text-align: center;
+  text-wrap: pretty;
+}
+
+dialog button {
+  background: transparent;
+  color: var(--text-color);
+  float: right;
+}
+
+#resultDiv {
+  display: none;
+}
