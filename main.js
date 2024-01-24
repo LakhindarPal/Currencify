@@ -1,4 +1,5 @@
 const API_KEY = "replace_with_your_api_key";
+const savedResults = JSON.parse(localStorage.getItem("savedResults")) || [];
 
 const createElement = (tag) => document.createElement(tag);
 const getElement = (id) => document.getElementById(id);
