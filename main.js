@@ -114,8 +114,7 @@ const convertCurrency = () => {
   const amount = parseFloat(elements.amountInput.value);
   if (isNaN(amount) || amount <= 0 || !baseCurrency || !targetCurrency) {
     elements.resultDiv.innerHTML = "<p>Invalid input. Please enter a valid amount and select both base and target currencies.</p>";
-    elements.resultDiv.style.display = "block";
-    elements.resultDiv.style.color = "orangered";
+    elements.resultDiv.style.cssText = "display: block; color: orangered;";
     return;
   }
 
@@ -132,13 +131,11 @@ const convertCurrency = () => {
          <p><strong>Result:</strong></p>
          <h2>${amount} ${baseCurrency.code} = ${convertedAmount} ${targetCurrency.code}</h2>`;
 
-      elements.resultDiv.style.display = "block";
-      elements.resultDiv.style.color = "inherit";
+      elements.resultDiv.style.cssText = "display: block; color: inherit;";
     })
     .catch(error => {
       elements.resultDiv.innerHTML = "<p>Error fetching conversion rate. Please try again later.</p>";
-      elements.resultDiv.style.display = "block";
-      elements.resultDiv.style.color = "orangered";
+      elements.resultDiv.style.cssText = "display: block; color: orangered;";
       console.error(error);
     });
 };
@@ -156,8 +153,7 @@ const swapCurrencies = () => {
 };
 
 elements.resetBtn.addEventListener("click", () => {
-  baseCurrency = null;
-  targetCurrency = null;
+  [baseCurrency, targetCurrency] = [null, null];
   elements.amountInput.value = "";
   elements.baseCurrencyInput.value = "";
   elements.targetCurrencyInput.value = "";
@@ -165,15 +161,15 @@ elements.resetBtn.addEventListener("click", () => {
   elements.resultDiv.style.display = "none";
 });
 
-elements.baseCurrencyInput.addEventListener("input", () => updateOptionsList(elements.baseCurrencyInput, elements.baseCurrencyOptions, currencies));
-elements.targetCurrencyInput.addEventListener("input", () => updateOptionsList(elements.targetCurrencyInput, elements.targetCurrencyOptions, currencies));
+const inputElements = [elements.baseCurrencyInput, elements.targetCurrencyInput];
 
-elements.baseCurrencyInput.addEventListener("focus", () => updateOptionsList(elements.baseCurrencyInput, elements.baseCurrencyOptions, currencies));
-elements.targetCurrencyInput.addEventListener("focus", () => updateOptionsList(elements.targetCurrencyInput, elements.targetCurrencyOptions, currencies));
+inputElements.forEach(inputEl => {
+  inputEl.addEventListener("input", () => updateOptionsList(inputEl, inputEl.nextElementSibling, currencies));
+  inputEl.addEventListener("focus", () => updateOptionsList(inputEl, inputEl.nextElementSibling, currencies));
+});
 
 document.addEventListener("click", (event) => {
-  handleDocumentClick(event, elements.baseCurrencyInput, elements.baseCurrencyOptions);
-  handleDocumentClick(event, elements.targetCurrencyInput, elements.targetCurrencyOptions);
+  inputElements.forEach((inputEl) => handleDocumentClick(event, inputEl, inputEl.nextElementSibling));
 });
 
 elements.convertBtn.addEventListener("click", convertCurrency);
