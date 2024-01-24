@@ -1,9 +1,9 @@
 :root {
   --bg-color: #f5f5f5;
-  --text-color: #000;
+  --text-color: #000000;
   --primary-color: #007bff;
   --secondary-color: #dddeee;
-  --mode-color: #fff;
+  --mode-color: #ffffff;
   --border-color: #546e7a;
   --hover-color: #0056b3;
   --label-color: #455a64;
@@ -12,10 +12,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #121212;
-    --text-color: #fff;
+    --text-color: #ffffff;
     --primary-color: #007bff;
     --secondary-color: #263238;
-    --mode-color: #000;
+    --mode-color: #000000;
     --border-color: #546e7a;
     --hover-color: #0056b3;
     --label-color: #cfd8dc;
@@ -36,9 +36,19 @@ body {
   color: var(--text-color);
 }
 
+h1 {
+  font-size: xx-large;
+}
+
 h1,
 h2 {
   color: var(--primary-color);
+  text-wrap: balance;
+}
+
+#logo {
+  height: 24px;
+  width: auto;
 }
 
 section {
@@ -101,7 +111,7 @@ input {
 }
 
 button {
-  color: #fff;
+  color: #ffffff;
   padding: 0.4rem 0.6rem;
   border: 1px solid var(--border-color);
   border-radius: 0.6rem;
@@ -140,6 +150,10 @@ footer,
   align-items: center;
 }
 
+footer p {
+  margin: 1rem;
+}
+
 label {
   font-weight: bold;
   color: var(--label-color);
@@ -154,7 +168,8 @@ dialog {
   overflow-y: auto;
 }
 
-dialog p dialog h2 {
+dialog p,
+dialog h2 {
   text-align: center;
   text-wrap: pretty;
 }
